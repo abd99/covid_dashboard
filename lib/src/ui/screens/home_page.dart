@@ -32,11 +32,29 @@ class HomePage extends StatelessWidget {
             return Center(
               child: CircularProgressIndicator(),
             );
-          } else if (state is StatsLoading) {
+          }
+          if (state is StatsLoading) {
             return Center(
               child: CircularProgressIndicator(),
             );
-          } else if (state is StatsLoaded) {
+          }
+          if (state is StatsLoaded) {
+            final stateDailyData = state.stateDailyData;
+            final stateDailyDataLength = stateDailyData.length;
+
+            List<double> _generateConfirmedData(int index) {
+              List<double> result = <double>[];
+              for (int i = stateDailyDataLength - 120;
+                  i < stateDailyDataLength;
+                  i++) {
+                result.add(
+                  (double.parse(stateDailyData[i]
+                      [state.stats.statewise[index].statecode.toLowerCase()])),
+                );
+              }
+              return result;
+            }
+
             return ListView.builder(
               itemCount: state.stats.statewise.length,
               itemBuilder: (context, index) {
@@ -46,19 +64,30 @@ class HomePage extends StatelessWidget {
                 String activeNumber = currentState.active;
                 String recoveredNumber = currentState.recovered;
                 String deceasedNumber = currentState.deaths;
-                return StateCard(
+
+                if (stateName == 'State Unassigned')
+                  return SizedBox(height: 0.0);
+                else {
+                  return StateCard(
                     stateName: stateName,
                     confirmedNumber: confirmedNumber,
                     activeNumber: activeNumber,
                     recoveredNumber: recoveredNumber,
-                    deceasedNumber: deceasedNumber);
+                    deceasedNumber: deceasedNumber,
+                    data: _generateConfirmedData(index),
+                  );
+                }
               },
             );
-          } else if (state is StateError) {
+          }
+          if (state is StateError) {
             return Center(
               child: Text('Falied to load Data'),
             );
           }
+          return Center(
+            child: CircularProgressIndicator(),
+          );
         },
       ),
     );

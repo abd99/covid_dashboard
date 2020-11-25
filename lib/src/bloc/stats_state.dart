@@ -21,7 +21,8 @@ class StatsLoading extends StatsState {
 
 class StatsLoaded extends StatsState {
   final StatsModel stats;
-  const StatsLoaded(this.stats);
+  final List stateDailyData;
+  const StatsLoaded(this.stats, this.stateDailyData);
   @override
   List<Object> get props => [stats];
 }

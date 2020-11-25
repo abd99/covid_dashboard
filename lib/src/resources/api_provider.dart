@@ -18,4 +18,10 @@ class CovidAPIProvider {
       throw Exception('Failed to load post');
     }
   }
+
+  fetchStatesDailyData() async {
+    http.Response response =
+        await http.get('https://api.covid19india.org/states_daily.json');
+    return json.decode(response.body)['states_daily'];
+  }
 }

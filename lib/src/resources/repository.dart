@@ -6,5 +6,7 @@ class Repository {
 
   Future<StatsModel> fetchAllData() => covidApiProvider.fetchAllData();
 
-  // Future<StatsModel> fetchTrailers(int movieId) => moviesApiProvider.fetchTrailer(movieId);
+  fetchStatesDailyData() async {
+    return covidApiProvider.fetchStatesDailyData();
+  }
 }

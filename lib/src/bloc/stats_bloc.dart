@@ -21,7 +21,9 @@ class StatsBloc extends Bloc<StatsEvent, StatsState> {
     if (event is GetStats) {
       try {
         final stats = await repository.fetchAllData();
-        yield StatsLoaded(stats);
+        final List stateDailyData = await repository.fetchStatesDailyData();
+
+        yield StatsLoaded(stats, stateDailyData);
       } on Error {
         yield StatsError('Faild to fetch Data');
       }
