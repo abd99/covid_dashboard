@@ -11,10 +11,10 @@ class StateCard extends StatelessWidget {
   }) : super(key: key);
 
   final String stateName;
-  final int confirmedNumber;
-  final int activeNumber;
-  final int recoveredNumber;
-  final int deceasedNumber;
+  final String confirmedNumber;
+  final String activeNumber;
+  final String recoveredNumber;
+  final String deceasedNumber;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class StateCard extends StatelessWidget {
               Text(
                 '$stateName',
                 style: TextStyle(
-                  fontSize: 18.0,
+                  fontSize: 16.0,
                   fontWeight: FontWeight.bold,
                 ),
               ),
