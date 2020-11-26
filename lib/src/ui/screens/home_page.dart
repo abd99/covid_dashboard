@@ -108,7 +108,9 @@ class _HomePageState extends State<HomePage> {
                 String recoveredNumber = currentState.recovered;
                 String deceasedNumber = currentState.deaths;
 
-                if (stateName == 'State Unassigned' || stateName == 'Total')
+                if (stateName == 'State Unassigned' ||
+                    stateName == 'Total' ||
+                    (int.parse(confirmedNumber) == 0))
                   return SizedBox(height: 0.0);
                 else {
                   return InkWell(

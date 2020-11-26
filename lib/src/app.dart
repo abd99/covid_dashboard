@@ -1,5 +1,6 @@
 import 'package:covid_dashboard/src/resources/repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -10,6 +11,13 @@ import 'ui/screens/home_page.dart';
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarBrightness: Brightness.light,
+        statusBarIconBrightness: Brightness.dark,
+      ),
+    );
     return BlocProvider(
       create: (context) => StatsBloc(Repository()),
       child: MaterialApp(
