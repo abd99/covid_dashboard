@@ -79,8 +79,6 @@ class StateCard extends StatelessWidget {
                   ],
                 ),
               ),
-              // Spacer(),
-
               Expanded(
                 child: Sparkline(
                   data: data,

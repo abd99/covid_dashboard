@@ -1,5 +1,6 @@
 import 'package:covid_dashboard/src/models/details_arguments.dart';
 import 'package:covid_dashboard/src/models/stats_model.dart';
+import 'package:covid_dashboard/src/ui/widgets/details_card.dart';
 import 'package:covid_dashboard/src/ui/widgets/line_chart.dart';
 import 'package:covid_dashboard/src/ui/widgets/pie_chart.dart';
 import 'package:covid_dashboard/src/ui/widgets/stacked_line_chart.dart';
@@ -143,25 +144,6 @@ class DetailsPage extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class DetailsCard extends StatelessWidget {
-  const DetailsCard({
-    Key key,
-    @required this.child,
-  }) : super(key: key);
-
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16.0),
-        child: child,
       ),
     );
   }
