@@ -62,6 +62,18 @@ class _HomePageState extends State<HomePage> {
               return result;
             }
 
+            List<double> _generateDetailedConfirmedData(int index) {
+              print(stateDailyDataLength);
+              List<double> result = <double>[];
+              for (int i = 0; i < stateDailyDataLength; i++) {
+                result.add(
+                  (double.parse(stateDailyData[i]
+                      [state.stats.statewise[index].statecode.toLowerCase()])),
+                );
+              }
+              return result;
+            }
+
             return ListView.builder(
               itemCount: state.stats.statewise.length,
               itemBuilder: (context, index) {
@@ -90,7 +102,7 @@ class _HomePageState extends State<HomePage> {
                         DetailsPage.routeName,
                         arguments: DetailsArguments(
                           currentState,
-                          _generateConfirmedData(index),
+                          _generateDetailedConfirmedData(index),
                         ),
                       );
                     },

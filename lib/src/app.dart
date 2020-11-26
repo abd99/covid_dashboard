@@ -18,9 +18,11 @@ class App extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity,
           fontFamily: GoogleFonts.montserrat().fontFamily,
           appBarTheme: AppBarTheme(
-            brightness: Brightness.light,
-            color: Colors.white,
-          ),
+              brightness: Brightness.light,
+              color: Colors.white,
+              iconTheme: IconThemeData(
+                color: Theme.of(context).iconTheme.color,
+              )),
         ),
         routes: {
           HomePage.routeName: (context) => HomePage(),

@@ -32,15 +32,16 @@ class LineChart extends StatelessWidget {
 
     return [
       charts.Series<Cases, int>(
-        id: 'Cases',
-        // colorFn specifies that the line will be red.
-        colorFn: (_, __) => charts.MaterialPalette.red.shadeDefault,
-        // areaColorFn specifies that the area skirt will be light red.
-        areaColorFn: (_, __) => charts.MaterialPalette.red.shadeDefault.lighter,
-        domainFn: (Cases cases, _) => cases.day,
-        measureFn: (Cases cases, _) => cases.cases,
-        data: parsedData,
-      ),
+          id: 'Cases',
+          // colorFn specifies that the line will be red.
+          colorFn: (_, __) => charts.MaterialPalette.red.shadeDefault,
+          // areaColorFn specifies that the area skirt will be light red.
+          areaColorFn: (_, __) =>
+              charts.MaterialPalette.red.shadeDefault.lighter,
+          domainFn: (Cases cases, _) => cases.day,
+          measureFn: (Cases cases, _) => cases.cases,
+          data: parsedData,
+          labelAccessorFn: (Cases row, _) => 'Confirmed cases'),
     ];
   }
 }
