@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:covid_dashboard/src/models/stats_model.dart';
+import 'package:covid_dashboard/src/models/test_model.dart';
 import 'package:covid_dashboard/src/resources/repository.dart';
 import 'package:equatable/equatable.dart';
 
@@ -16,14 +17,13 @@ class StatsBloc extends Bloc<StatsEvent, StatsState> {
   Stream<StatsState> mapEventToState(
     StatsEvent event,
   ) async* {
-    yield StatsLoading();
-
     if (event is GetStats) {
+      yield StatsLoading();
       try {
         final stats = await repository.fetchAllData();
         final List stateDailyData = await repository.fetchStatesDailyData();
-
-        yield StatsLoaded(stats, stateDailyData);
+        final testData = await repository.fetchTestData();
+        yield StatsLoaded(stats, stateDailyData, testData);
       } on Error {
         yield StatsError('Faild to fetch Data');
       }

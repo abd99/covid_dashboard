@@ -1,4 +1,3 @@
-import 'package:covid_dashboard/src/ui/widgets/line_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sparkline/flutter_sparkline.dart';
 
@@ -81,10 +80,24 @@ class StateCard extends StatelessWidget {
                 ),
               ),
               // Spacer(),
+
               Expanded(
-                child: LineChart(
+                child: Sparkline(
                   data: data,
-                  animate: true,
+                  fallbackHeight: 50,
+                  fallbackWidth: 400,
+                  lineColor: Colors.red,
+                  pointSize: 5,
+                  lineWidth: 3,
+                  sharpCorners: true,
+                  lineGradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Colors.red[500],
+                      Colors.red[200],
+                    ],
+                  ),
                 ),
               ),
             ],

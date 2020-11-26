@@ -9,4 +9,8 @@ class Repository {
   fetchStatesDailyData() async {
     return covidApiProvider.fetchStatesDailyData();
   }
+
+  fetchTestData() async {
+    return covidApiProvider.fetchTestData();
+  }
 }
