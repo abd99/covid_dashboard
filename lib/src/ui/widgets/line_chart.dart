@@ -34,7 +34,7 @@ class LineChart extends StatelessWidget {
       charts.Series<Cases, int>(
           id: 'Cases',
           // colorFn specifies that the line will be red.
-          colorFn: (_, __) => charts.MaterialPalette.red.shadeDefault,
+          colorFn: (_, __) => charts.MaterialPalette.red.shadeDefault.lighter,
           // areaColorFn specifies that the area skirt will be light red.
           areaColorFn: (_, __) =>
               charts.MaterialPalette.red.shadeDefault.lighter,
