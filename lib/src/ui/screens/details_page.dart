@@ -2,6 +2,7 @@ import 'package:covid_dashboard/src/models/details_arguments.dart';
 import 'package:covid_dashboard/src/models/stats_model.dart';
 import 'package:covid_dashboard/src/ui/widgets/line_chart.dart';
 import 'package:covid_dashboard/src/ui/widgets/pie_chart.dart';
+import 'package:covid_dashboard/src/ui/widgets/stacked_line_chart.dart';
 import 'package:flutter/material.dart';
 
 class DetailsPage extends StatelessWidget {
@@ -30,9 +31,9 @@ class DetailsPage extends StatelessWidget {
         centerTitle: true,
         elevation: 0.0,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(32.0),
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(32.0),
           child: Column(
             children: [
               Text(
@@ -45,7 +46,58 @@ class DetailsPage extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: LineChart(
-                    data: args.chartData,
+                    args.chartData,
+                    animate: true,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 16.0,
+              ),
+              Text(
+                'Test Data',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 40.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              maxRadius: 6.0,
+                              backgroundColor: Colors.blue[300],
+                            ),
+                            SizedBox(width: 4.0),
+                            Text('Tested'),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              maxRadius: 6.0,
+                              backgroundColor: Colors.red[300],
+                            ),
+                            SizedBox(width: 4.0),
+                            Text('Positive'),
+                          ],
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height / 3,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: StackedLineChart(
+                    args.stateTestData,
                     animate: true,
                   ),
                 ),

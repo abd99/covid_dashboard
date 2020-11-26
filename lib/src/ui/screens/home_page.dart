@@ -93,6 +93,8 @@ class _HomePageState extends State<HomePage> {
                   print('invalid data from API');
                 }
               }
+              print('Tested:- {data.tested}');
+              print('Positive:- {data.positive}');
               return data;
             }
 
@@ -106,7 +108,7 @@ class _HomePageState extends State<HomePage> {
                 String recoveredNumber = currentState.recovered;
                 String deceasedNumber = currentState.deaths;
 
-                if (stateName == 'State Unassigned')
+                if (stateName == 'State Unassigned' || stateName == 'Total')
                   return SizedBox(height: 0.0);
                 else {
                   return InkWell(

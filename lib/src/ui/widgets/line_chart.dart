@@ -6,8 +6,8 @@ class LineChart extends StatelessWidget {
   final List<double> data;
   final bool animate;
 
-  LineChart({
-    this.data,
+  LineChart(
+    this.data, {
     this.animate,
   });
 

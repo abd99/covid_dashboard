@@ -44,8 +44,8 @@ class PieChart extends StatelessWidget {
   static List<charts.Series<Cases, String>> parseData(
       int confirmed, int active, int recovered, int deaths) {
     var pieData = [
-      Cases('Active', active, Colors.blue),
-      Cases('Recovered', recovered, Colors.green[400]),
+      Cases('Active', active, Colors.blue[300]),
+      Cases('Recovered', recovered, Colors.green[300]),
       Cases('Deaths', deaths, Colors.grey),
     ];
 
