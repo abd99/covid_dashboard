@@ -1,5 +1,6 @@
 import 'package:covid_dashboard/src/bloc/stats_bloc.dart';
 import 'package:covid_dashboard/src/models/details_arguments.dart';
+import 'package:covid_dashboard/src/models/state_test_model.dart';
 import 'package:covid_dashboard/src/models/stats_model.dart';
 import 'package:covid_dashboard/src/ui/screens/details_page.dart';
 import 'package:covid_dashboard/src/ui/widgets/state_card.dart';
@@ -36,17 +37,21 @@ class _HomePageState extends State<HomePage> {
       ),
       body: BlocBuilder<StatsBloc, StatsState>(
         builder: (context, state) {
+          print(state);
           if (state is StatsInitial) {
+            // print('Initial');
             return Center(
               child: CircularProgressIndicator(),
             );
           }
           if (state is StatsLoading) {
+            // print('Loading');
             return Center(
               child: CircularProgressIndicator(),
             );
           }
           if (state is StatsLoaded) {
+            // print('Loaded');
             final stateDailyData = state.stateDailyData;
             final stateDailyDataLength = stateDailyData.length;
 
@@ -72,6 +77,23 @@ class _HomePageState extends State<HomePage> {
                 );
               }
               return result;
+            }
+
+            var testData = state.testData.statesTestedData;
+
+            StateTestData _generateStateTestData(String stateName) {
+              StateTestData data = StateTestData();
+              for (int i = 0; i < testData.length; i++) {
+                try {
+                  if (testData[i].state == stateName) {
+                    data.tested.add(int.parse(testData[i].totaltested));
+                    data.positive.add(int.parse(testData[i].positive));
+                  }
+                } on Exception catch (e) {
+                  print('invalid data from API');
+                }
+              }
+              return data;
             }
 
             return ListView.builder(
@@ -103,6 +125,7 @@ class _HomePageState extends State<HomePage> {
                         arguments: DetailsArguments(
                           currentState,
                           _generateDetailedConfirmedData(index),
+                          _generateStateTestData(stateName),
                         ),
                       );
                     },
@@ -116,6 +139,7 @@ class _HomePageState extends State<HomePage> {
               child: Text('Falied to load Data'),
             );
           }
+          print('Default');
           return Center(
             child: CircularProgressIndicator(),
           );

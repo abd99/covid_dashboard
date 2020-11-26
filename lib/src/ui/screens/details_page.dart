@@ -32,44 +32,50 @@ class DetailsPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(32.0),
-        child: Column(
-          children: [
-            Text(
-              'Total confirmed cases',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: LineChart(
-                  data: args.chartData,
-                  animate: true,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Text(
+                'Total confirmed cases',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height / 3,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: LineChart(
+                    data: args.chartData,
+                    animate: true,
+                  ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 16.0,
-            ),
-            Text(
-              'Active cases',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            Expanded(
-              child: Row(
-                children: [
-                  Expanded(
-                    child: PieChart(
-                      confirmed,
-                      active,
-                      recovered,
-                      deaths,
-                      animate: true,
-                    ),
-                  ),
-                ],
+              SizedBox(
+                height: 16.0,
               ),
-            ),
-          ],
+              Text(
+                'Active cases',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height / 3,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: PieChart(
+                        confirmed,
+                        active,
+                        recovered,
+                        deaths,
+                        animate: true,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
