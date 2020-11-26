@@ -1,18 +1,26 @@
 import 'package:covid_dashboard/src/bloc/stats_bloc.dart';
+import 'package:covid_dashboard/src/models/details_arguments.dart';
 import 'package:covid_dashboard/src/models/stats_model.dart';
+import 'package:covid_dashboard/src/ui/screens/details_page.dart';
 import 'package:covid_dashboard/src/ui/widgets/state_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomePage extends StatelessWidget {
-  void getStats(BuildContext context) {
-    final statsBloc = BlocProvider.of<StatsBloc>(context);
-    statsBloc.add(GetStats());
+class HomePage extends StatefulWidget {
+  static final String routeName = '/home';
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    BlocProvider.of<StatsBloc>(context)..add(GetStats());
   }
 
   @override
   Widget build(BuildContext context) {
-    getStats(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -43,10 +51,9 @@ class HomePage extends StatelessWidget {
             final stateDailyDataLength = stateDailyData.length;
 
             List<double> _generateConfirmedData(int index) {
+              print(stateDailyDataLength);
               List<double> result = <double>[];
-              for (int i = stateDailyDataLength - 120;
-                  i < stateDailyDataLength;
-                  i++) {
+              for (int i = 300; i < stateDailyDataLength; i++) {
                 result.add(
                   (double.parse(stateDailyData[i]
                       [state.stats.statewise[index].statecode.toLowerCase()])),
@@ -68,13 +75,25 @@ class HomePage extends StatelessWidget {
                 if (stateName == 'State Unassigned')
                   return SizedBox(height: 0.0);
                 else {
-                  return StateCard(
-                    stateName: stateName,
-                    confirmedNumber: confirmedNumber,
-                    activeNumber: activeNumber,
-                    recoveredNumber: recoveredNumber,
-                    deceasedNumber: deceasedNumber,
-                    data: _generateConfirmedData(index),
+                  return InkWell(
+                    child: StateCard(
+                      stateName: stateName,
+                      confirmedNumber: confirmedNumber,
+                      activeNumber: activeNumber,
+                      recoveredNumber: recoveredNumber,
+                      deceasedNumber: deceasedNumber,
+                      data: _generateConfirmedData(index),
+                    ),
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        DetailsPage.routeName,
+                        arguments: DetailsArguments(
+                          currentState,
+                          _generateConfirmedData(index),
+                        ),
+                      );
+                    },
                   );
                 }
               },

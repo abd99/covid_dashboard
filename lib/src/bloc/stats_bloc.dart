@@ -16,9 +16,8 @@ class StatsBloc extends Bloc<StatsEvent, StatsState> {
   Stream<StatsState> mapEventToState(
     StatsEvent event,
   ) async* {
-    yield StatsLoading();
-
     if (event is GetStats) {
+      yield StatsLoading();
       try {
         final stats = await repository.fetchAllData();
         final List stateDailyData = await repository.fetchStatesDailyData();
@@ -28,5 +27,13 @@ class StatsBloc extends Bloc<StatsEvent, StatsState> {
         yield StatsError('Faild to fetch Data');
       }
     }
+    // else if (event is GetDetails) {
+    //   yield DetailsLoading();
+    //   try {
+    //     yield DetailsLoaded(event.state, event.chartData);
+    //   } on Error {
+    //     yield DetailsError('Faild to fetch Data');
+    //   }
+    // }
   }
 }
