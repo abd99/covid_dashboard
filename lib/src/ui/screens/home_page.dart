@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage> {
                     data.positive.add(int.parse(testData[i].positive));
                   }
                 } on Exception catch (e) {
-                  print('invalid data from API');
+                  print('invalid data from API :$e');
                 }
               }
               print('Tested:- {data.tested}');
