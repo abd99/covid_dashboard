@@ -1,9 +1,7 @@
-/// Simple pie chart with outside labels example.
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 
 class PieChart extends StatelessWidget {
-  // final List<charts.Series> seriesList;
   final bool animate;
 
   final int confirmed;
@@ -57,14 +55,12 @@ class PieChart extends StatelessWidget {
         colorFn: (Cases cases, _) =>
             charts.ColorUtil.fromDartColor(cases.colorVal),
         data: pieData,
-        // Set a label accessor to control the text of the arc label.
         labelAccessorFn: (Cases row, _) => '${row.value}',
       )
     ];
   }
 }
 
-/// Sample linear data type.
 class Cases {
   String type;
   int value;

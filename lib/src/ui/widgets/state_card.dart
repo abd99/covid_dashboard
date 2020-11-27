@@ -31,7 +31,6 @@ class StateCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(25.0),
       ),
-      // elevation: 18.0,
       child: Container(
         height: 127.0,
         width: 329.0,
